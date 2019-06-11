@@ -15,20 +15,20 @@ shape = w.create_oval(0, 0, 20, 20, fill='red')
 x = y = 5
 
 #Moving the ball
-for ball in range(0 ,100):
+for ball in range(0 ,500):
   w.move(shape, x, y)
   master.update()
   time.sleep(.01)
 
-# pos = canvas.coords(shape)  
-# if pos[1] <= 0:
-# 	y = 3
-# if pos[3] >= 600:
-# 	y = -3
-# if pos[0] <= 0:
-# 	x = 3
-# if pos[2] >= 900:
-# 	x = -3
+pos = canvas.coords(shape)  
+if pos[1] <= 0:
+	y = 3
+if pos[3] >= 600:
+	y = -3
+if pos[0] <= 0:
+	x = 3
+if pos[2] >= 900:
+	x = -3
 
 master.mainloop()
 # class ball(self):

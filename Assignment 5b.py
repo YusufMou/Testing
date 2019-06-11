@@ -47,6 +47,8 @@ def check():
 	draw.grid_forget()
 	addcomp = int(computer1) + int(computer2) + int(computer3)
 	adduser = int(user1) + int(user2) + int(user3)
+	if user3 == '':
+		adduser = int(user1) + int(user2)
 	#Label(root, text=str(adduser)).grid(row=101, column=1)
 	if addcomp > 21 and adduser > 21:
 		Label(root, text="It's a tie").grid(row=100, column=1)
