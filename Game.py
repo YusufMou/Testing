@@ -14,7 +14,8 @@ class Ball:
         self.yspeed = -1
         self.hit_left = False
         self.hit_right = False
-        self.score = 0
+        self.player_right = 0
+        self.player_left = 0
 
     def draw(self):
         self.canvas.move(self.id, self.xspeed, self.yspeed)
@@ -26,15 +27,17 @@ class Ball:
             self.yspeed = -4
         if pos[0] <= 0:
             self.hit_left = True
+            self.player_right += 1
         if pos[2] >= 900:
             self.hit_right = True
+            self.player_left += 1
         if self.hit_paddle_right(pos) == True:
             self.yspeed = -3
             self.xspeed = random.randrange(-3,3)
-            self.score += 1
         if self.hit_paddle_left(pos) == True:
         	self.yspeed = 3
         	self.xspeed = random.randrange(-3,3)
+
 
     def hit_paddle_right(self, pos):
         paddle_pos = self.canvas.coords(self.paddle.id)
@@ -45,8 +48,8 @@ class Ball:
 
     def hit_paddle_left(self, pos):
     	paddle_pos = self.canvas.coords(self.paddle_b.id_b)
-    	if pos[3] >= paddle_pos[1] and pos[1] <= paddle_pos[3]:
-    		if pos[2] >= paddle_pos[0] and pos[2] <= paddle_pos[2]:
+    	if pos[3] >= paddle_pos[1] and pos[3] <= paddle_pos[3]:
+    		if pos[2] >= paddle_pos[0] and pos[0] <= paddle_pos[2]:
     			return True
     	return False
 
@@ -100,7 +103,7 @@ class Paddle_b:
 # Create window and canvas to draw on
 tk = Tk()
 tk.title("Ball Game")
-canvas = Canvas(tk, width=900, height=500, bd=0, bg='papaya whip')
+canvas = Canvas(tk, width=900, height=500, bd=0, bg='white')
 canvas.pack()
 label = canvas.create_text(5, 5, anchor=NW, text="Score: 0")
 tk.update()
@@ -113,12 +116,13 @@ while ball.hit_right == False and ball.hit_left == False:
     ball.draw()
     paddle.draw()
     paddle_b.draw()
-    canvas.itemconfig(label, text="Score: "+str(ball.score))
+    canvas.itemconfig(label, text="Player 1: "+str(ball.player_left) + " Player 2: " +str(ball.player_right))
     tk.update_idletasks()
     tk.update()
     time.sleep(0.01)
 
 # Game Over
+sb = canvas.create_text(450, 100, text="Player 1: "+str(ball.player_left)+" Player 2: "+str(ball.player_right), font=("Helvetica", 30))
 go_label = canvas.create_text(450,250,text="GAME OVER",font=("Helvetica",30))
 tk.update()
 
