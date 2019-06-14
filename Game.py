@@ -17,6 +17,7 @@ class Ball:
         self.player_right = 0
         self.player_left = 0
 
+    #Making ball bounce on edge of canvas
     def draw(self):
         self.canvas.move(self.id, self.xspeed, self.yspeed)
         pos = self.canvas.coords(self.id)
@@ -38,7 +39,7 @@ class Ball:
         	self.yspeed = 3
         	self.xspeed = random.randrange(-3,3)
 
-
+    #Making ball bounce on paddle B
     def hit_paddle_right(self, pos):
         paddle_pos = self.canvas.coords(self.paddle.id)
         if pos[2] >= paddle_pos[0] and pos[0] <= paddle_pos[2]:
@@ -46,6 +47,7 @@ class Ball:
                 return True
         return False
 
+    #Making ball bounce on paddle B
     def hit_paddle_left(self, pos):
     	paddle_pos = self.canvas.coords(self.paddle_b.id_b)
     	if pos[3] >= paddle_pos[1] and pos[3] <= paddle_pos[3]:
@@ -63,6 +65,7 @@ class Paddle:
         self.canvas.bind_all('<KeyPress-Up>', self.move_up)
         self.canvas.bind_all('<KeyPress-Down>', self.move_down)
 
+    #Preventing the paddle from going out of the canvas
     def draw(self):
         self.canvas.move(self.id, 0, self.yspeed)
         pos = self.canvas.coords(self.id)
@@ -72,12 +75,14 @@ class Paddle:
         if pos[3] >= 500:
             self.yspeed = 0
 
+    #speed of moving paddle A
     def move_down(self, evt):
         self.yspeed = 4
     def move_up(self, evt):
         self.yspeed = -4
 
 class Paddle_b:
+    #Properties of paddle B
     def __init__(self, canvas, color):
         self.canvas = canvas
         self.id_b = canvas.create_rectangle(0, 100, 10, 0, fill=color)
@@ -86,6 +91,7 @@ class Paddle_b:
         self.canvas.bind_all('<KeyPress-w>', self.move_up)
         self.canvas.bind_all('<KeyPress-s>', self.move_down)
 
+    #Preventing the paddle from going out of the canvas
     def draw(self):
         self.canvas.move(self.id_b, 0, self.yspeed)
         pos = self.canvas.coords(self.id_b)
@@ -93,7 +99,7 @@ class Paddle_b:
             self.yspeed = 0
         if pos[3] >= 500:
             self.yspeed = 0
-
+    #speed of moving paddle B
     def move_down(self, evt):
         self.yspeed = 4
     def move_up(self, evt):
