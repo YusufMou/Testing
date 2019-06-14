@@ -1,10 +1,10 @@
 from tkinter import *
 root = Tk()
 root.title("Perfect Pong")
-can = Canvas(root, width=700, height=500, bd=0,)
+can = Canvas(root, width=700, height=600, bd=0,)
 can.pack()
-filename = 'titlescreenbackground.png'
+filename = 'C:\\Users\\s448772\\Documents\\GitHub\\Testing\\titlescreenbackground.png'
 img = PhotoImage(file=filename)
-can.create_image(350, 250, image=img)
+can.create_image(400, 250, image=img)
 
 root.mainloop()

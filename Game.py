@@ -50,8 +50,8 @@ class Ball:
     #Making ball bounce on paddle B
     def hit_paddle_left(self, pos):
     	paddle_pos = self.canvas.coords(self.paddle_b.id_b)
-    	if pos[3] >= paddle_pos[1] and pos[3] <= paddle_pos[3]:
-    		if pos[2] >= paddle_pos[0] and pos[0] <= paddle_pos[2]:
+    	if pos[3] >= paddle_pos[1] and pos[2] <= paddle_pos[2]:
+    		if pos[2] >= paddle_pos[0] and pos[2] <= paddle_pos[2]:
     			return True
     	return False
 
@@ -118,14 +118,15 @@ paddle_b = Paddle_b(canvas, 'green')
 ball = Ball(canvas, 'red', 25, paddle, paddle_b)
 
 # Animation loop
-while ball.hit_right == False and ball.hit_left == False:
-    ball.draw()
-    paddle.draw()
-    paddle_b.draw()
-    canvas.itemconfig(label, text="Player 1: "+str(ball.player_left) + " Player 2: " +str(ball.player_right))
-    tk.update_idletasks()
-    tk.update()
-    time.sleep(0.01)
+while ball.player_left != 7 and ball.player_right != 7:
+    while ball.hit_right == False and ball.hit_left == False:
+        ball.draw()
+        paddle.draw()
+        paddle_b.draw()
+        canvas.itemconfig(label, text="Player 1: "+str(ball.player_left) + " Player 2: " +str(ball.player_right))
+        tk.update_idletasks()
+        tk.update()
+        time.sleep(0.01)
 
 # Game Over
 sb = canvas.create_text(450, 100, text="Player 1: "+str(ball.player_left)+" Player 2: "+str(ball.player_right), font=("Helvetica", 30))
