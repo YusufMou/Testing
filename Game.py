@@ -119,14 +119,14 @@ ball = Ball(canvas, 'red', 25, paddle, paddle_b)
 
 # Animation loop
 while ball.player_left != 7 and ball.player_right != 7:
-    while ball.hit_right == False and ball.hit_left == False:
-        ball.draw()
-        paddle.draw()
-        paddle_b.draw()
-        canvas.itemconfig(label, text="Player 1: "+str(ball.player_left) + " Player 2: " +str(ball.player_right))
-        tk.update_idletasks()
-        tk.update()
-        time.sleep(0.01)
+    # while ball.hit_right == False and ball.hit_left == False:
+    ball.draw()
+    paddle.draw()
+    paddle_b.draw()
+    canvas.itemconfig(label, text="Player 1: "+str(ball.player_left) + " Player 2: " +str(ball.player_right))
+    tk.update_idletasks()
+    tk.update()
+    time.sleep(0.01)
 
 # Game Over
 sb = canvas.create_text(450, 100, text="Player 1: "+str(ball.player_left)+" Player 2: "+str(ball.player_right), font=("Helvetica", 30))
